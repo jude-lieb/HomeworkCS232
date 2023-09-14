@@ -265,7 +265,7 @@ short won(void)
         if(board[i][j] != checkValue) {
             return 0; //if one or more values do not match winning config, return 0
         }
-        if(j == d - 1) { //Incrementing row and column
+        if(j == d - 1) { //Incrementing the rows and columns
             j = 0;
             ++i;
         } else {
