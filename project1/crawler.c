@@ -119,11 +119,11 @@ int main(int argc, char** argv){
 int contains(const struct listNode *pNode, const char *addr){
   // TODO: complete this
   if(pNode != NULL) {
-    if(pNode -> addr == addr) {
+    if(!strcmp(pNode -> addr, addr)) {
       return 1;
     } else {
-      contains(pNode -> next, addr);
-    }
+      return contains(pNode -> next, addr);
+    } 
   }
   return 0;
 }
@@ -136,8 +136,10 @@ int contains(const struct listNode *pNode, const char *addr){
 void insertBack(struct listNode *pNode, const char *addr){
   // TODO: complete this
   if(pNode -> next == NULL) {
+    //allocating memory for new node
     struct listNode *temp = malloc(sizeof(struct listNode));
-    strncpy(temp -> addr, addr, strlen(addr) * sizeof(char));
+    //filling contents of node structure
+    strncpy(temp -> addr, addr, MAX_ADDR_LENGTH);
     temp -> next = NULL;
     pNode -> next = temp;
   } else {
@@ -151,8 +153,8 @@ void insertBack(struct listNode *pNode, const char *addr){
  *   one on each line
  */
 void printAddresses(const struct listNode *pNode){
-  // TODO: complete this
-  if(pNode -> next != NULL) {
+  //TODO: complete this
+  if(pNode != NULL) {
     printf("%s\n", pNode -> addr);
     printAddresses(pNode -> next);
   }
@@ -166,6 +168,7 @@ void destroyList(struct listNode *pNode){
   if(pNode -> next == NULL) {
     free(pNode);
   } else {
+    //creating temporary node to allow for next function call
     struct listNode temp = *pNode;
     free(pNode);
     destroyList(temp.next);
