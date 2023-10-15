@@ -14,7 +14,6 @@ int main() {
     const char temp[] = "sup1";
     insert(&list1, temp);
 
-    printf("%s", list1.addr);
     return 0;
 }
 
