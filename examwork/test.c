@@ -2,27 +2,18 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct listNode{
-  char addr[100];
-  struct listNode *next;
-};
 
-void insert(struct listNode *pNode, const char *addr);
 
 int main() {
-    struct listNode list1 = {"https://users.pfw.edu/chenz/testWeb/page_000003.html", NULL};
+    // for(int i = 97; i < 123; ++i) {
+    //   printf("%d %c\n", (char) i, i);
+    // }
 
-    const char temp[] = "https://users.pfw.edu/chenz/testWeb/page_000003.html";
-    insert(&list1, temp);
-    return 0;
+    // for(int i = 65; i < 91; ++i) {
+    //   printf("%d %c\n", (char) i, i);
+    // }
+
+    printf("%d", (int) '\'');
 }
 
 
-void insert(struct listNode *pNode, const char *addr) {
-    if(strcmp(pNode -> addr, addr) == 0) {
-       printf("this worked!");
-
-    } else {
-      printf("not a match");
-    }
-}

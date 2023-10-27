@@ -10,7 +10,6 @@
  */
 struct listNode{
   char addr[MAX_ADDR_LENGTH];
-
   struct listNode *next;
 };
 
