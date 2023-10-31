@@ -81,10 +81,11 @@ int addWordOccurrence(const char* word, const int wordLength, struct trieNode *r
     } else {
       root -> subNodes[nextIndex] -> occurences = 0;
     }
+    //Number of nodes in root increases
     root -> subCount++;
   }
 
-  if(wordLength > 1) { //runs until word is all entered
+  if(wordLength > 1) { //runs until entire word is entered
     word = word + 1;
     addWordOccurrence(word, wordLength - 1, root -> subNodes[nextIndex]);
   }

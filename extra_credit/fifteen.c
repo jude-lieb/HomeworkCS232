@@ -142,6 +142,9 @@ int main(int argc, char* argv[])
     fclose(file);
 
     //clearing heap memory
+    for(int i = 0; i < d; ++i) {
+        free(board[i]);
+    }
     free(board);
 
     // success
