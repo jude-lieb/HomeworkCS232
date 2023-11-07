@@ -73,12 +73,6 @@ struct trieNode *indexPage(const char *url)
 
   struct trieNode *root = createNode('\0');
 
-  root->subNodes = malloc(sizeof(struct trieNode *) * 26);
-  for (i = 0; i < 26; i++)
-  {
-    root->subNodes[i] = NULL;
-  }
-
   isValid = 0;
   char *current = buffer;
   size = strlen(buffer);
@@ -202,11 +196,7 @@ void printTrieContents(char *word, struct trieNode *root)
 
 int freeTrieMemory(struct trieNode *node)
 {
-  if (node == NULL)
-  {
-    return 0;
-  }
-  for (int i = 0; i < 26; i++)
+  for (int i = 0; i < node->subCount; ++i)
   {
     freeTrieMemory(node->subNodes[i]);
   }
