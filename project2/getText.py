@@ -9,7 +9,7 @@ import errno
 doc = sys.stdin.read()
 soup = BeautifulSoup(doc, "html.parser")
 
-strings = soup.findAll(text=True)
+strings = soup.findAll(string=True)
 
 try:
     for s in strings:

@@ -47,13 +47,14 @@ void indexPage(const char* url)
   struct trieNode temp = {'\0',0,0,malloc(sizeof(struct trieNode*) * 26)};
   root = &temp;
 
-  addWordOccurrence("sup", 3, root);
-  
+  addWordOccurrence("a", 1, root);
+  addWordOccurrence("ab", 2, root);
   printTrieContents(&(root -> letter), root);
 }
 
 int addWordOccurrence(const char* word, const int wordLength, struct trieNode *root)
 {
+  //printf("loop ran, char = %c\n", *word);
   int status = -1;
   int nextIndex; //determines which node is the next root
 
@@ -65,11 +66,13 @@ int addWordOccurrence(const char* word, const int wordLength, struct trieNode *r
   }
 
   if(status != -1) { //if the character already has a node, increment occurrences
+    printf("subnode found\n");
     if(wordLength == 1) {
+      printf("wordlength = %d incremented letter = %c\n", wordLength, *word);
         root -> subNodes[status] -> occurences++;
     }
     nextIndex = status;
-  } else { //if the character is not found, make a new subNod
+  } else { //if the character is not found, make a new subNode
     nextIndex = root -> subCount;
     root -> subNodes[nextIndex] = malloc(sizeof(struct trieNode*));
     root -> subNodes[nextIndex] -> subNodes = malloc(sizeof(struct trieNode*) * 26);
@@ -77,6 +80,7 @@ int addWordOccurrence(const char* word, const int wordLength, struct trieNode *r
     root -> subNodes[nextIndex] -> subCount = 0;
 
     if(wordLength == 1) { //checking it is the end of a word
+      printf("occurence added for char %c\n", *word);
       root -> subNodes[nextIndex] -> occurences = 1;
     } else {
       root -> subNodes[nextIndex] -> occurences = 0;
@@ -94,38 +98,21 @@ int addWordOccurrence(const char* word, const int wordLength, struct trieNode *r
 
 void printTrieContents(char* word, struct trieNode *root)
 {
+  
   if(root -> subCount != 0) {
     char *temp = malloc(sizeof(char) * (strlen(word)));
     strcpy(temp, word);
     temp[strlen(word)] = '\0';
     strcat(temp, (char*) &(root -> letter));
-
-    //Alphabetic sorting algorithm
-    int sort[root -> subCount];
-    int start[root -> subCount];
+    printf("printing char = %c occ = %d\n", root -> letter, root -> occurences);
+    
 
     for(int i = 0; i < root -> subCount; ++i) {
-      start[i] = (int) (root -> subNodes[i] -> letter);
-    }
-
-    for(int i = 0; i < root -> subCount; ++i) {
-      int min = start[i];
-      int index = i;
-      for(int j = 0; j < root -> subCount; ++j) {
-        if(start[j] < min) {
-          min = start[j];
-          index = j;
-        }
-      }
-      sort[i] = index;
-      start[index] = 200;
-    }
-
-    for(int i = 0; i < root -> subCount; ++i) {
-        printTrieContents(temp, root -> subNodes[sort[i]]);
+        printTrieContents(temp, root -> subNodes[i]);
     }
     free(temp);
-  } else if(root -> occurences > 0) {    
+  }
+  if(root -> occurences > 0) {    
     printf("%s%c: %d\n", (char*) word, (char) root -> letter, root -> occurences);
   }
 }
