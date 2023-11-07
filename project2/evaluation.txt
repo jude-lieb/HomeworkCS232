@@ -1,0 +1,17 @@
+Division of work for project 2
+
+Jude ~9hrs:
+
+- trie structure definition
+- addWordOccurrence
+- printTrieContents (not including aphabetic sorting)
+- Made changes to indexPage
+- Main
+
+Cody ~11hrs:
+
+- freeTrieMemory
+- indexPage
+- createNode
+- refactoring for addWordOccurrence and other functions
+- Alphabetic sort for printTrieContents
