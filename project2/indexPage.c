@@ -63,7 +63,7 @@ struct trieNode *createNode(char letter)
 /* TODO: change this return type */
 struct trieNode *indexPage(const char *url)
 {
-  
+
   char buffer[MAX_LEN] = {};
   getText(url, buffer, MAX_LEN);
 
@@ -165,12 +165,17 @@ void printTrieContents(char *word, struct trieNode *root)
   {
     // Alphabetic sorting
     struct trieNode *sortedNodes[root->subCount];
-    //copy memory to maintain structure of orginial trie
-    memcpy(sortedNodes, root->subNodes, root->subCount * sizeof(struct trieNode *));
+    // copy memory to maintain structure of orginial trie
+    int copyCount = root->subCount;
 
-    for (int i = 0; i < root->subCount - 1; ++i)
+    for (int i = 0; i < copyCount; ++i)
     {
-      for (int j = i + 1; j < root->subCount; ++j)
+      sortedNodes[i] = root->subNodes[i];
+    }
+
+    for (int i = 0; i < copyCount - 1; ++i)
+    {
+      for (int j = i + 1; j < copyCount; ++j)
       {
         if (sortedNodes[i]->letter > sortedNodes[j]->letter)
         {
@@ -181,11 +186,11 @@ void printTrieContents(char *word, struct trieNode *root)
       }
     }
 
-    char *temp = malloc(strlen(word) + 2);
-    strcpy(temp, word);
-    temp[strlen(word)] = root->letter;
-    temp[strlen(word) + 1] = '\0';
-
+    char *temp = malloc(strnlen(word, 100) + 2);
+    strncpy(temp, word, strnlen(word, 100));
+    temp[strnlen(word, 100)] = root->letter;
+    temp[strnlen(word,100) + 1] = '\0';
+    
     for (int i = 0; i < root->subCount; ++i)
     {
       printTrieContents(temp, sortedNodes[i]);

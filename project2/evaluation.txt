@@ -1,17 +1,20 @@
-Division of work for project 2
+Project 2 Evaluation
 
-Jude ~9hrs:
+Both of us made some changes to each other's functions during debugging.
+
+Myself ~9hrs worktime estimate
 
 - trie structure definition
 - addWordOccurrence
 - printTrieContents (not including aphabetic sorting)
 - Made changes to indexPage
-- Main
+- Main function 
 
-Cody ~11hrs:
+
+Cody ~11hrs worktime estimate
 
 - freeTrieMemory
 - indexPage
-- createNode
+- createNode (to limit code reuse)
 - refactoring for addWordOccurrence and other functions
 - Alphabetic sort for printTrieContents

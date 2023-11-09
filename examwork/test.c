@@ -32,8 +32,19 @@ int freeTrieMemory(/* TODO: any parameters you need */);
 int main(int argc, char** argv){
   //TODO: write the (simple) main function
   //argv[1] will be the URL to index, if argc > 1
+  char original[] = "size";
+  printf("%ld\n", strlen(original));
 
-  indexPage(argv[1]);
+
+  char *temp = malloc(sizeof(char) * 6);
+  char *temp1 = malloc(sizeof(char) * 6);
+
+  strncpy(temp, original, 4);
+  strcpy(temp1, original);
+
+  temp[4] = '4';
+
+  printf("%s", temp);
 
   return 0;
 }

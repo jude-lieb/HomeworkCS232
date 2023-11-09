@@ -10,3 +10,5 @@ fifteen: fifteen.c
 
 clean:
 	rm -f *.o a.out core fifteen log.txt
+	
+	
