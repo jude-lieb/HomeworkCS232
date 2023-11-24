@@ -1,0 +1,3 @@
+student1 90
+student_2 80
+student__3 70
