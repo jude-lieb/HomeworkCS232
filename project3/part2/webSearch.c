@@ -35,7 +35,6 @@ int main(int argc, char **argv) {
 
     while(fgets(line, 100, urlFile) != NULL && n < MAX_N) {
         if(sscanf(line,"%s%d", url, &hopLimit) < 2) {
-            //printf("Error scanning url.");
             return 0;
         }
 
@@ -49,16 +48,12 @@ int main(int argc, char **argv) {
             }
             hopNum++;
             if(hopNum <= hopLimit && n < MAX_N) {
-                //printf("hop number %d hopLimit %d\n", hopNum, hopLimit);
                 res = getLink(url, newUrl, MAX_ADDR_LENGTH);
                 if(!res) {
                     break;
                 }
-                
                 strncpy(url, newUrl, MAX_ADDR_LENGTH);
-                
             } else {
-                //printf("Break: Hop num = %d limit = %d n = %d max n = %d\n", hopNum, hopLimit, n, MAX_N);
                 break;
             }
         }
@@ -73,7 +68,7 @@ int main(int argc, char **argv) {
     readInputs(trieList, pListStart, termCount, n);
     printf("Exiting the program\n");
 
-    //Cleanup
+    //Cleanup for tries and urls
     destroyList(pListStart);
     free(termCount);
    

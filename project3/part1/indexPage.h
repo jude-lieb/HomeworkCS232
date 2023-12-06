@@ -11,7 +11,6 @@ struct trieNode
   struct trieNode **subNodes;
 };
 
-
 struct trieNode *createNode(char letter);
 
 struct trieNode *indexPage(const char *url, int *numTerms);

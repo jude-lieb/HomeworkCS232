@@ -8,4 +8,4 @@ webSearch: webSearch.c $(OBJS)
 %.o : %.c %.h
 	$(CC) $(CFLAGS) -c $< -o $@ -lm
 clean:
-	rm *.o webSearch.exe
+	rm *.o webSearch

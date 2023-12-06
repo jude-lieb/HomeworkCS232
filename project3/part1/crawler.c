@@ -3,72 +3,6 @@
 #include <string.h>
 #include <time.h>
 #include "crawler.h"
-  
-int runCrawler(int argc, char** argv){
-  
-  long seed;
-
-  char startAddr[MAX_ADDR_LENGTH];
-  char destAddr[MAX_ADDR_LENGTH];
-  
-  int hopNum, numHops;
-  
-  struct listNode *pListStart;
-
-  if(argc < 3 || argc > 4){
-    fprintf(stderr, "USAGE: %s startAddr numHops [rand seed]", argv[0]);
-    return -1;
-  }
-  
-  /* initialization */
-  if(argc >= 4){
-    seed = atol(argv[3]);
-  }
-  else{
-    seed = time(NULL);
-  }
-
-  printf("seed = %ld\n", seed);
-  srand(seed);
-
-  strncpy(startAddr, argv[1], MAX_ADDR_LENGTH);
-  startAddr[MAX_ADDR_LENGTH - 1] = '\0';
-
-  numHops = atoi(argv[2]);
-
-  pListStart = malloc(sizeof(struct listNode));
-  if(pListStart == NULL){
-    fprintf(stderr, "ERROR: could not allocate memory\n");
-    return -2;
-  }
-  strncpy(pListStart->addr, startAddr, MAX_ADDR_LENGTH);
-  pListStart->next = NULL;
-
-  /* start the crawling */
-  for(hopNum=1; hopNum <= numHops; hopNum++){
-    int res = getLink(startAddr, destAddr, MAX_ADDR_LENGTH);
-
-    if(!res){
-      printf("Dead end on hop %d: no outgoing links\n", hopNum);
-      break;
-    }
-
-    if(contains(pListStart, destAddr)){
-      printf("Cycle detected on hop %d: address %s\n", hopNum, destAddr);
-      hopNum--; // try again for this hop in the next iteration
-    }
-    else{
-      insertBack(pListStart, destAddr);
-      strncpy(startAddr, destAddr, MAX_ADDR_LENGTH);
-    }
-  }
-
-  printAddresses(pListStart);
-
-  destroyList(pListStart);
-
-  return 0;
-}
 
 int contains(const struct listNode *pNode, const char *addr){
   if(pNode != NULL && addr != NULL) {
@@ -91,13 +25,6 @@ void insertBack(struct listNode *pNode, const char *addr){
     pNode -> next = temp;
   } else {
     insertBack(pNode -> next, addr);
-  }
-}
-
-void printAddresses(const struct listNode *pNode){
-  if(pNode != NULL) {
-    printf("%s\n", pNode -> addr);
-    printAddresses(pNode -> next);
   }
 }
 

@@ -10,13 +10,7 @@ struct trieNode *indexPage(const char *url, int *numTerms)
   getText(url, buffer, MAX_LEN);
   
   int isValid, i, size;
-
-   struct trieNode *root = createNode('\0');
-  // struct trieNode *root = malloc(sizeof(struct trieNode));
-  // struct trieNode newNode = {'\0', 0,0, malloc(sizeof(struct trieNode*) * 26)};
-  // *root = newNode;
-
-
+  struct trieNode *root = createNode('\0');
 
   isValid = 0;
   char *current = buffer;
@@ -55,13 +49,10 @@ struct trieNode *indexPage(const char *url, int *numTerms)
 struct trieNode *createNode(char letter)
 {
   struct trieNode *newNode = malloc(sizeof(struct trieNode));
-
-
   newNode->letter = letter;
   newNode->occurences = 0;
   newNode->subCount = 0;
   newNode->subNodes = malloc(sizeof(struct trieNode*) * 26);
-
   return newNode;
 }
 

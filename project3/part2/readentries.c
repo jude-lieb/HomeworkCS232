@@ -55,7 +55,6 @@ void readInputs(struct trieNode **trieList, struct listNode *pListStart, int *te
                     strncpy(searchTerms[queriesRead], current, MAX_QUERY_LEN);
                     queriesRead++;
                     isValid = 0;
-                    
                 }
                 
                 //ending at newline char
@@ -75,6 +74,7 @@ void readInputs(struct trieNode **trieList, struct listNode *pListStart, int *te
             continue;
         }
 
+        //Print results
         if(queriesRead > 0) {
             printf("Query is \"%s\".\n", entryCopy);
             printf("IDF scores are\n");

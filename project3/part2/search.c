@@ -19,7 +19,7 @@ int *search(long double *idfScores, long double *urlScores, char** words, int wo
     long double logTop;
     long double logBottom;
 
-
+    //finding scores for each word
     for(int i = 0; i < wordCount; ++i) {
             docsWithTerm[i] = 0;
             wordScore = 0;
@@ -36,6 +36,7 @@ int *search(long double *idfScores, long double *urlScores, char** words, int wo
             idfScores[i] = idfScore;
     }
 
+    //calculating overall scores for each page
     for(int l = 0; l < trieCount; ++l) {
         pageScores[l] = 0;
         for(int i = 0; i < wordCount; ++i) {
@@ -43,8 +44,6 @@ int *search(long double *idfScores, long double *urlScores, char** words, int wo
             occurrences = (long double) getOccurrences(trieList[l], words[i]);
             terms = (long double) termCount[l];
             tfScore = occurrences / (long double) terms;
-            // printf("tfScore = %f\n", tfScore);
-            //printf("idfScore = %f\n", idfScores[i]);
             totalScore = tfScore * idfScores[i]; 
             pageScores[l] = pageScores[l] + totalScore;
         }
@@ -54,6 +53,7 @@ int *search(long double *idfScores, long double *urlScores, char** words, int wo
     int maxIndex;
     int *results = malloc(sizeof(int) * 3);
 
+    //Finding top 3 scoring pages
     for(int j = 0; j < 3; ++j) {
         max = 0;
         maxIndex = -1;
@@ -68,9 +68,7 @@ int *search(long double *idfScores, long double *urlScores, char** words, int wo
         if(maxIndex != -1) {
             *urlCount = *urlCount + 1;
         }
-        //printf("pagescore max = %f\n", max);
         pageScores[maxIndex] = -1;
-
     }
     return results;
 }

@@ -12,8 +12,6 @@ int contains(const struct listNode *pNode, const char *addr);
 
 void insertBack(struct listNode *pNode, const char *addr);
 
-void printAddresses(const struct listNode *pNode);
-
 void destroyList(struct listNode *pNode);
 
 /*
